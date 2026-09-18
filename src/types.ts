@@ -19,4 +19,10 @@ export interface Passage {
   vocabDefinition: string;
   funFact: string;
   questions: Question[];
+  /** Where the player (a Chronicle time guide) lands, shown before the passage. */
+  arrival: string;
+  /** Shown after a correct answer: the moment's memory is anchored in the record. */
+  memorySecured: string;
+  /** Shown after a wrong or missed answer: the record blurs, no real history changes. */
+  memoryFlicker: string;
 }

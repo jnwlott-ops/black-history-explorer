@@ -176,21 +176,21 @@ function render() {
 }
 
 function progressLabel(): string {
-  return `Figure ${state.passageIndex + 1} of ${state.order.length}`;
+  return `Jump ${state.passageIndex + 1} of ${state.order.length}`;
 }
 
 function renderStart(): string {
   return `
     <div class="screen start-screen">
       <h1>Black History Explorer</h1>
-      <p class="tagline">A timed reading &amp; vocabulary challenge.</p>
+      <p class="tagline">You're a time guide for the Chronicle Project.</p>
       <ul class="rules">
-        <li>Read a short passage about a figure from Black history.</li>
-        <li>Answer three quick questions about it — vocabulary, main idea, and inference.</li>
-        <li>You have ${QUESTION_SECONDS} seconds per question. Faster, correct answers score more.</li>
-        <li>Answer in a row without missing to build a streak bonus.</li>
+        <li>Every jump drops you beside a real person from Black history, moments before something important happens.</li>
+        <li>Read what's unfolding, then answer three quick questions about it — vocabulary, main idea, and inference — to anchor the memory in the record.</li>
+        <li>You have ${QUESTION_SECONDS} seconds per question. Read fast and correctly to lock the moment in before it slips.</li>
+        <li>Answer in a row without missing to build a streak and steady the timeline.</li>
       </ul>
-      <button id="start-btn" class="primary-btn">Start</button>
+      <button id="start-btn" class="primary-btn">Begin your first jump</button>
     </div>
   `;
 }
@@ -200,10 +200,11 @@ function renderReading(): string {
   return `
     <div class="screen reading-screen">
       <div class="progress">${progressLabel()}</div>
+      <p class="arrival">${p.arrival}</p>
       <h2>${p.name}</h2>
       <p class="years">${p.years}</p>
       <p class="passage">${renderPassageHtml(p.text)}</p>
-      <button id="ready-btn" class="primary-btn">I'm ready — start questions</button>
+      <button id="ready-btn" class="primary-btn">You're in the moment — begin</button>
     </div>
   `;
 }
@@ -250,12 +251,14 @@ function renderFeedback(): string {
   const heading = state.lastCorrect ? 'Correct!' : state.selectedChoice === null ? "Time's up" : 'Not quite';
   const pointsLine = state.lastCorrect ? `<p class="points">+${state.lastPoints} points</p>` : '';
   const answerLine = `<p class="answer-reveal">Correct answer: <strong>${q.choices[q.correctIndex]}</strong></p>`;
+  const narrative = state.lastCorrect ? p.memorySecured : p.memoryFlicker;
   return `
     <div class="screen feedback-screen ${resultClass}">
       <h2>${heading}</h2>
       ${pointsLine}
       ${state.lastCorrect ? '' : answerLine}
       <p class="explanation">${q.explanation}</p>
+      <p class="narrative-line">${narrative}</p>
       <button id="continue-btn" class="primary-btn">Continue</button>
     </div>
   `;
@@ -267,9 +270,10 @@ function renderPassageDone(): string {
   return `
     <div class="screen passage-done-screen">
       <h2>${p.name}</h2>
+      <p class="narrative-line">Timeline secured. The record will hold.</p>
       <p class="fun-fact">${p.funFact}</p>
       <p class="running-score">Score so far: ${state.score}</p>
-      <button id="next-passage-btn" class="primary-btn">${isLast ? 'See results' : 'Next figure'}</button>
+      <button id="next-passage-btn" class="primary-btn">${isLast ? 'End the mission' : 'Slip to the next moment'}</button>
     </div>
   `;
 }
@@ -281,16 +285,17 @@ function renderResults(): string {
     .join('');
   return `
     <div class="screen results-screen">
-      <h1>Game Complete</h1>
+      <h1>Mission Debrief</h1>
+      <p class="tagline">The Chronicle is intact. Here's what you secured.</p>
       <p class="final-score">${state.score} points</p>
       <div class="stat-row">
         <div class="stat"><span class="stat-value">${accuracy}%</span><span class="stat-label">Accuracy</span></div>
         <div class="stat"><span class="stat-value">${state.correctCount}/${state.totalQuestions}</span><span class="stat-label">Correct</span></div>
         <div class="stat"><span class="stat-value">${state.bestStreak}</span><span class="stat-label">Best Streak</span></div>
       </div>
-      <h2>Who you explored</h2>
+      <h2>Moments you secured</h2>
       <ul class="figure-list">${figureList}</ul>
-      <button id="restart-btn" class="primary-btn">Play again</button>
+      <button id="restart-btn" class="primary-btn">Run the mission again</button>
     </div>
   `;
 }

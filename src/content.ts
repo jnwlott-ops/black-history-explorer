@@ -9,6 +9,9 @@ export const passages: Passage[] = [
     vocabWord: 'relentless',
     vocabDefinition: 'not stopping or giving up, even when things are difficult',
     funFact: 'Tubman never lost a single passenger on any of her thirteen trips.',
+    arrival: 'You slip into the Maryland woods at night, 1849, just steps behind a woman moving fast and sure through the dark.',
+    memorySecured: "The memory holds. Harriet Tubman's thirteen trips are anchored in the record, exactly as they happened.",
+    memoryFlicker: 'The memory flickers — for a moment, the record blurs. You steady yourself and look again.',
     questions: [
       {
         kind: 'vocab',
@@ -56,6 +59,9 @@ export const passages: Passage[] = [
     vocabWord: 'abolitionist',
     vocabDefinition: 'a person who worked to end slavery',
     funFact: 'Douglass taught himself to read and write in secret, since it was illegal to teach enslaved people.',
+    arrival: 'You land in a quiet room in Maryland, where a boy is tracing letters in the dirt with a stick, hiding from view.',
+    memorySecured: "The memory holds. Frederick Douglass's fight to read — and to be heard — is locked into the record.",
+    memoryFlicker: 'The memory flickers. Something about the account is still hazy. Focus.',
     questions: [
       {
         kind: 'vocab',
@@ -103,6 +109,9 @@ export const passages: Passage[] = [
     vocabWord: 'boycott',
     vocabDefinition: 'an organized refusal to buy from or use something, done to force a change',
     funFact: 'The Montgomery Bus Boycott lasted 381 days before the city ended segregated seating.',
+    arrival: "You're standing in the aisle of a Montgomery bus, December 1955, watching a tired woman decide not to move.",
+    memorySecured: 'The memory holds. The bus, the boycott, the 381 days — all anchored, unshaken.',
+    memoryFlicker: 'The memory flickers. The record wavers for a second before you catch it.',
     questions: [
       {
         kind: 'vocab',
@@ -150,6 +159,9 @@ export const passages: Passage[] = [
     vocabWord: 'nonviolent',
     vocabDefinition: 'not using physical force or violence',
     funFact: 'In 1964, King became the youngest person up to that time to win the Nobel Peace Prize.',
+    arrival: "You're in the crowd at the base of the Lincoln Memorial, August 1963, the air thick with quiet expectation.",
+    memorySecured: 'The memory holds. The dream Dr. King spoke of that day is locked into the record for good.',
+    memoryFlicker: 'The memory flickers — the words start to blur. Steady it.',
     questions: [
       {
         kind: 'vocab',
@@ -197,6 +209,9 @@ export const passages: Passage[] = [
     vocabWord: 'barnstorming',
     vocabDefinition: 'performing daring, showy flying stunts to entertain a crowd',
     funFact: 'Coleman had to travel all the way to France to find a flight school that would train her.',
+    arrival: "You're on a French airfield in 1921, watching a young woman climb into a cockpit for the flight of her life.",
+    memorySecured: "The memory holds. Bessie Coleman's license — and every loop she flew after — is anchored in the record.",
+    memoryFlicker: 'The memory flickers. The sky in the record goes hazy for a moment.',
     questions: [
       {
         kind: 'vocab',
@@ -244,6 +259,9 @@ export const passages: Passage[] = [
     vocabWord: 'trajectory',
     vocabDefinition: 'the curved path that an object follows as it moves through space',
     funFact: "John Glenn wouldn't fly until Katherine Johnson personally checked the computer's math.",
+    arrival: "You're in a NASA office in 1961, pencils scratching, as a mathematician checks numbers no one else trusts yet.",
+    memorySecured: "The memory holds. Katherine Johnson's trajectory — and Glenn's trust in it — is locked into the record.",
+    memoryFlicker: "The memory flickers. A number somewhere doesn't add up yet. Look again.",
     questions: [
       {
         kind: 'vocab',
@@ -291,6 +309,9 @@ export const passages: Passage[] = [
     vocabWord: 'restraint',
     vocabDefinition: 'the ability to control your feelings or actions, especially when provoked',
     funFact: 'Robinson won Rookie of the Year in 1947 and league MVP just two seasons later, in 1949.',
+    arrival: "You're behind home plate, 1947, watching a rookie absorb insult after insult without ever swinging back off the field.",
+    memorySecured: "The memory holds. Jackie Robinson's restraint — and his record — are anchored for good.",
+    memoryFlicker: 'The memory flickers. Somewhere in the record, the story wavers.',
     questions: [
       {
         kind: 'vocab',
@@ -338,6 +359,9 @@ export const passages: Passage[] = [
     vocabWord: 'self-made',
     vocabDefinition: 'having become successful through your own hard work rather than inherited wealth',
     funFact: 'Walker trained thousands of Black women as sales agents, giving them their own source of income.',
+    arrival: "You're in a parlor in the early 1900s, where a woman is mixing the first batch of a product that will become an empire.",
+    memorySecured: "The memory holds. Madam C.J. Walker's rise — and everyone she lifted with her — is anchored in the record.",
+    memoryFlicker: 'The memory flickers. Part of the ledger is still smudged. Focus.',
     questions: [
       {
         kind: 'vocab',
@@ -385,6 +409,9 @@ export const passages: Passage[] = [
     vocabWord: 'unbossed',
     vocabDefinition: 'not controlled or told what to do by anyone',
     funFact: "Chisholm's 1972 presidential run made her the first Black candidate to seek a major party's nomination.",
+    arrival: "You're in a campaign office, 1972, surrounded by handmade signs that read 'unbought and unbossed.'",
+    memorySecured: "The memory holds. Shirley Chisholm's run — and every door it opened after — is locked into the record.",
+    memoryFlicker: 'The memory flickers. The slogan on the wall blurs for a second. Steady it.',
     questions: [
       {
         kind: 'vocab',
@@ -432,6 +459,9 @@ export const passages: Passage[] = [
     vocabWord: 'innovation',
     vocabDefinition: 'a new idea, method, or invention',
     funFact: 'Morgan used his own gas mask invention to rescue trapped workers from a flooded tunnel in 1916.',
+    arrival: "You're at the mouth of a flooded tunnel under Lake Erie, 1916, watching two brothers pull safety hoods over their faces.",
+    memorySecured: "The memory holds. Garrett Morgan's inventions — and the rescue that proved them — are anchored in the record.",
+    memoryFlicker: "The memory flickers. Smoke fills the record's edges for a moment. Focus and try again.",
     questions: [
       {
         kind: 'vocab',
