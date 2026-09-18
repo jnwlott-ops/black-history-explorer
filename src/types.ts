@@ -83,6 +83,9 @@ export interface SaveData {
   runsCompleted: number;
   bestStreakLifetime: number;
   equipped: Partial<Record<GearSlot, string>>;
+  guideName: string;
+  skinTone: string;
+  robeColor: string;
 }
 
 /** A simple NES-tile-style landscape, built from flat color bands and silhouette rects. */

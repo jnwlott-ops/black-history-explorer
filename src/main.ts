@@ -2,7 +2,7 @@ import './style.css';
 import { passages, systemicMoments } from './content';
 import { computeScore, QUESTION_SECONDS, renderPassageHtml, shuffle } from './game';
 import type { Passage, Question, SystemicMoment, GearSlot } from './types';
-import { drawSprite, gearForSlot, startIdleBob } from './sprite';
+import { drawSprite, gearForSlot, startIdleBob, SKIN_TONES, ROBE_COLORS } from './sprite';
 import { playBlip, playCorrect, playWrong, playLevelUp, playBadge } from './sfx';
 import { flashScreen, burstParticles, popScore, ensureScanlineOverlay } from './effects';
 import { loadSave, persistSave, levelForXp, xpProgress, rankForLevel, applyRunToSave, BADGES } from './save';
@@ -287,6 +287,15 @@ function render() {
       document.querySelectorAll<HTMLInputElement>('.gear-toggle').forEach((input) => {
         input.addEventListener('change', () => toggleGear(input.dataset.slot as GearSlot, input.dataset.gear!));
       });
+      document.querySelectorAll<HTMLButtonElement>('[data-skin]').forEach((btn) => {
+        btn.addEventListener('click', () => setAppearance('skinTone', btn.dataset.skin!));
+      });
+      document.querySelectorAll<HTMLButtonElement>('[data-robe]').forEach((btn) => {
+        btn.addEventListener('click', () => setAppearance('robeColor', btn.dataset.robe!));
+      });
+      document.querySelector<HTMLInputElement>('#guide-name-input')?.addEventListener('input', (e) => {
+        setGuideName((e.target as HTMLInputElement).value);
+      });
       setupAvatarCanvas('#avatar-large');
       break;
     case 'reading':
@@ -342,8 +351,20 @@ function render() {
 function setupAvatarCanvas(selector: string) {
   const canvas = document.querySelector<HTMLCanvasElement>(selector);
   if (!canvas) return;
-  drawSprite(canvas, equippedGearIds());
+  drawSprite(canvas, equippedGearIds(), { skinTone: save.skinTone, robeColor: save.robeColor });
   stopIdleBob = startIdleBob(canvas);
+}
+
+function setAppearance(key: 'skinTone' | 'robeColor', value: string) {
+  playBlip();
+  save[key] = value;
+  persistSave(save);
+  render();
+}
+
+function setGuideName(name: string) {
+  save.guideName = name.slice(0, 24);
+  persistSave(save);
 }
 
 function triggerFeedbackEffects() {
@@ -374,8 +395,8 @@ function renderStart(): string {
       <div class="avatar-row">
         <canvas id="avatar-preview" class="avatar-canvas avatar-canvas--small" width="64" height="64"></canvas>
         <div class="avatar-rank">
-          <div class="rank-name">${rankForLevel(level)}</div>
-          <div class="rank-level">Level ${level}</div>
+          <div class="rank-name">${save.guideName}</div>
+          <div class="rank-level">${rankForLevel(level)} &middot; Level ${level}</div>
         </div>
       </div>
       <ul class="rules">
@@ -426,6 +447,15 @@ function renderGuide(): string {
     `;
   }).join('');
 
+  const skinSwatches = SKIN_TONES.map(
+    (color) =>
+      `<button class="swatch ${save.skinTone === color ? 'swatch--selected' : ''}" style="background:${color}" data-skin="${color}" aria-label="Skin tone"></button>`,
+  ).join('');
+  const robeSwatches = ROBE_COLORS.map(
+    (color) =>
+      `<button class="swatch ${save.robeColor === color ? 'swatch--selected' : ''}" style="background:${color}" data-robe="${color}" aria-label="Robe color"></button>`,
+  ).join('');
+
   return `
     <div class="screen guide-screen">
       <h1>Your Guide</h1>
@@ -433,6 +463,13 @@ function renderGuide(): string {
       <div class="rank-name">${rankForLevel(level)} &middot; Level ${level}</div>
       <div class="xp-track"><div class="xp-fill" style="width: ${pct}%"></div></div>
       <p class="xp-label">${into} / ${span} XP to next level</p>
+      <h2>Appearance</h2>
+      <label class="name-label" for="guide-name-input">Name</label>
+      <input id="guide-name-input" class="name-input" type="text" maxlength="24" value="${save.guideName}" placeholder="Name your guide" />
+      <p class="swatch-label">Skin tone</p>
+      <div class="swatch-row">${skinSwatches}</div>
+      <p class="swatch-label">Robe color</p>
+      <div class="swatch-row">${robeSwatches}</div>
       <h2>Gear</h2>
       <div class="gear-list">${gearRows}</div>
       <h2>Badges</h2>

@@ -1,4 +1,5 @@
 import type { BadgeDef, SaveData } from './types';
+import { SKIN_TONES, ROBE_COLORS } from './sprite';
 
 const STORAGE_KEY = 'black-history-explorer:save';
 export const XP_PER_CORRECT = 20;
@@ -24,6 +25,9 @@ function defaultSave(): SaveData {
     runsCompleted: 0,
     bestStreakLifetime: 0,
     equipped: {},
+    guideName: 'Guide',
+    skinTone: SKIN_TONES[0],
+    robeColor: ROBE_COLORS[0],
   };
 }
 

@@ -22,14 +22,32 @@ const BASE_SPRITE: string[] = [
   '................',
 ];
 
-const PALETTE: Record<string, string> = {
-  K: '#1a1206',
-  H: '#2b2f6b',
-  S: '#e8b98a',
-  E: '#f5f5f5',
-  R: '#3a3f8f',
-  B: '#5b3a21',
-};
+export interface Customization {
+  skinTone: string;
+  robeColor: string;
+}
+
+export const SKIN_TONES = ['#ffe0bd', '#f1c27d', '#e0ac69', '#c68642', '#8d5524', '#5c3a21'];
+export const ROBE_COLORS = ['#3a3f8f', '#b23a3a', '#2f8f5b', '#8a4fff', '#d98c2b', '#2f8f9c'];
+
+function darken(hex: string, factor: number): string {
+  const n = parseInt(hex.slice(1), 16);
+  const channel = (shift: number) => Math.round(((n >> shift) & 0xff) * factor)
+    .toString(16)
+    .padStart(2, '0');
+  return `#${channel(16)}${channel(8)}${channel(0)}`;
+}
+
+function buildPalette(customization: Customization): Record<string, string> {
+  return {
+    K: '#1a1206',
+    H: darken(customization.robeColor, 0.75),
+    S: customization.skinTone,
+    E: '#f5f5f5',
+    R: customization.robeColor,
+    B: '#5b3a21',
+  };
+}
 
 export const GEAR: GearItem[] = [
   {
@@ -97,11 +115,12 @@ export function gearForSlot(slot: GearSlot): GearItem[] {
 }
 
 /** Renders the base sprite plus any equipped gear onto a canvas, pixel by pixel. */
-export function drawSprite(canvas: HTMLCanvasElement, equippedGearIds: string[]): void {
+export function drawSprite(canvas: HTMLCanvasElement, equippedGearIds: string[], customization: Customization): void {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const size = BASE_SPRITE.length;
   const scale = canvas.width / size;
+  const palette = buildPalette(customization);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let y = 0; y < size; y++) {
@@ -109,7 +128,7 @@ export function drawSprite(canvas: HTMLCanvasElement, equippedGearIds: string[])
     for (let x = 0; x < row.length; x++) {
       const key = row[x];
       if (key === TRANSPARENT) continue;
-      ctx.fillStyle = PALETTE[key] ?? '#000';
+      ctx.fillStyle = palette[key] ?? '#000';
       ctx.fillRect(x * scale, y * scale, scale, scale);
     }
   }

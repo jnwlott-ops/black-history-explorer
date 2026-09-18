@@ -429,6 +429,49 @@ h2 {
   margin: 0;
 }
 
+.name-label,
+.swatch-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.name-input {
+  background: var(--surface);
+  border: 1px solid var(--surface-raised);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.name-input:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.swatch-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.swatch--selected {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
 .gear-list {
   display: flex;
   flex-direction: column;
