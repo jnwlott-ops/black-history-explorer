@@ -593,12 +593,14 @@ export const jackieQuest: Quest = {
         silhouettes: [
           { x: 0.05, y: 0.55, w: 0.18, h: 0.15, color: '#8a6a45' },
           { x: 0.28, y: 0.5, w: 0.12, h: 0.2, color: '#9c7a52' },
-          { x: 0.55, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
-          { x: 0.62, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
-          { x: 0.69, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
-          { x: 0.76, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.68, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.75, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.82, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.89, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
         ],
       },
+      character: 'mechanic',
+      characterX: 0.54,
       choices: [
         {
           id: 'confront',
@@ -675,10 +677,12 @@ export const jackieQuest: Quest = {
         silhouettes: [
           { x: 0.1, y: 0.4, w: 0.2, h: 0.1, color: '#4a4a4a' },
           { x: 0.35, y: 0.5, w: 0.15, h: 0.2, color: '#6b5a3a' },
-          { x: 0.6, y: 0.5, w: 0.15, h: 0.2, color: '#6b5a3a' },
-          { x: 0.85, y: 0.35, w: 0.04, h: 0.35, color: '#3a3a3a' },
+          { x: 0.72, y: 0.5, w: 0.15, h: 0.2, color: '#6b5a3a' },
+          { x: 0.92, y: 0.35, w: 0.04, h: 0.35, color: '#3a3a3a' },
         ],
       },
+      character: 'soldier',
+      characterX: 0.61,
       choices: [
         {
           id: 'comply',
@@ -762,6 +766,8 @@ export const jackieQuest: Quest = {
           { x: 0.63, y: 0.3, w: 0.02, h: 0.02, color: '#f2d879' },
         ],
       },
+      character: 'suit',
+      characterX: 0.52,
       choices: [
         {
           id: 'offer-plain',
@@ -841,6 +847,8 @@ export const jackieQuest: Quest = {
           { x: 0.45, y: 0.66, w: 0.1, h: 0.08, color: '#c9a86b' },
         ],
       },
+      character: 'ballplayer',
+      characterX: 0.25,
       choices: [
         {
           id: 'ignore-focus',

@@ -4,7 +4,7 @@ import type { QuestChapter } from './types';
 import { playBlip, playCorrect, playWrong, playLevelUp, playBadge } from './sfx';
 import { flashScreen, burstParticles, popScore } from './effects';
 import { loadSave, persistSave, levelForXp, rankForLevel, applyRunToSave, BADGES } from './save';
-import { drawLandscape } from './scenes';
+import { drawLandscape, drawCharacter } from './scenes';
 
 type QuestScreen =
   | 'intro'
@@ -297,6 +297,7 @@ function drawSceneCanvas(selector: string, brightness: number) {
   if (!canvas) return;
   const chapter = currentChapter();
   drawLandscape(canvas, chapter.sceneConfig);
+  drawCharacter(canvas, chapter.character, chapter.characterX, chapter.sceneConfig.groundLine);
   canvas.style.filter = `brightness(${brightness})`;
 }
 

@@ -88,6 +88,8 @@ export interface SaveData {
   robeColor: string;
 }
 
+export type CharacterArchetype = 'mechanic' | 'kid' | 'soldier' | 'suit' | 'ballplayer';
+
 /** A simple NES-tile-style landscape, built from flat color bands and silhouette rects. */
 export interface SceneConfig {
   sky: [string, string];
@@ -121,6 +123,8 @@ export interface QuestChapter {
   historicalContext: string;
   scene: string;
   sceneConfig: SceneConfig;
+  character: CharacterArchetype;
+  characterX: number;
   choices: QuestChoiceOption[];
   realityText: string;
   closingLine: string;
