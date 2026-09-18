@@ -1,4 +1,4 @@
-import type { Passage, SystemicMoment } from './types';
+import type { Passage, SystemicMoment, Quest } from './types';
 
 export const passages: Passage[] = [
   {
@@ -568,3 +568,336 @@ export const systemicMoments: SystemicMoment[] = [
     ],
   },
 ];
+
+export const jackieQuest: Quest = {
+  id: 'jackie-robinson-quest',
+  title: 'Jackie Robinson: Four Lives',
+  subject: 'Jackie Robinson',
+  chapters: [
+    {
+      id: 'pepper-street',
+      title: 'Pepper Street',
+      persona: 'Carl Anderson',
+      personaBlurb:
+        "You're Carl Anderson, a mechanic who lives near the Robinson family. The neighborhood kids treat your garage as the one place on Pepper Street that'll let them hang around.",
+      year: 'Pasadena, California — mid-1930s',
+      historicalContext:
+        'Pasadena markets itself nationally as a genteel, white resort town — the Rose Bowl, the Tournament of Roses — while restrictive housing covenants and informal rules pen its small Black population into a few blocks, and the public plunge pool is open to Black residents only one day a week.',
+      scene:
+        "Jackie Robinson, twelve years old, runs with a loose group of neighborhood kids the city calls the \"Pepper Street Gang\" — more bored than criminal, but drifting toward real trouble. Today they turn up at your garage rattled: turned away from the plunge again, on the wrong day, by an attendant who didn't bother explaining why. One of the older boys is already talking about going back tonight to settle it.",
+      sceneConfig: {
+        sky: ['#6ea8d8', '#cfe8ff'],
+        ground: '#c9a86b',
+        groundLine: 0.7,
+        accent: { x: 0.82, y: 0.18, r: 0.06, color: '#f2d879' },
+        silhouettes: [
+          { x: 0.05, y: 0.55, w: 0.18, h: 0.15, color: '#8a6a45' },
+          { x: 0.28, y: 0.5, w: 0.12, h: 0.2, color: '#9c7a52' },
+          { x: 0.55, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.62, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.69, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+          { x: 0.76, y: 0.45, w: 0.03, h: 0.28, color: '#3a3f8f' },
+        ],
+      },
+      choices: [
+        {
+          id: 'confront',
+          label: 'Tell them to go back and confront the attendant tonight.',
+          isReality: false,
+          consequence:
+            "You back the older boy's plan. That night, a scuffle at the pool gate ends with two of the boys arrested for trespassing — a record that follows them for years, and does nothing to open the pool.",
+        },
+        {
+          id: 'ignore',
+          label: "Tell them to forget it — it's not worth the trouble.",
+          isReality: false,
+          consequence:
+            "You wave it off, and so do they — until the same anger comes out sideways a week later, in a fight two blocks over. Ignoring it didn't make it go away; it just waited for a worse moment.",
+        },
+        {
+          id: 'redirect',
+          label: 'Challenge Jackie to a race to the corner and back, right there at the garage.',
+          isReality: true,
+        },
+      ],
+      realityText:
+        "That's what you really did. You didn't lecture them about the pool — you challenged Jackie to outrun you to the corner and back. He did, easily, and you told him so, straight: that kind of speed was wasted on trouble. It became a habit — you, and later Rev. Karl Downs at the local church, kept finding Jackie games and competitions to channel his energy into instead of letting his group's restlessness curdle into something worse.",
+      closingLine: "The record holds — not because you punished him, but because you outran his anger with something better to do.",
+      questions: [
+        {
+          kind: 'vocab',
+          prompt: "In the story, to \"channel\" Jackie's energy most nearly means:",
+          choices: ['To waste it', 'To direct it toward something specific, like sports', 'To ignore it entirely', 'To punish it'],
+          correctIndex: 1,
+          explanation: 'Channeling his energy means giving it somewhere useful to go — exactly what the race, and later organized sports, did.',
+        },
+        {
+          kind: 'main-idea',
+          prompt: "According to the chapter, why didn't Pasadena's reputation match daily life for the Robinson family?",
+          choices: [
+            'The city was actually fully integrated',
+            'The city marketed itself as an idyllic resort town while enforcing informal segregation, like limiting the public pool to one day a week for Black residents',
+            "The Robinsons didn't actually live in Pasadena",
+            'There was no pool in Pasadena',
+          ],
+          correctIndex: 1,
+          explanation: "The chapter contrasts Pasadena's genteel public image with the real, informal segregation its Black residents faced.",
+        },
+        {
+          kind: 'inference',
+          prompt: "What does Carl Anderson's choice to challenge Jackie to a race, instead of lecturing him, suggest about how he understood young Jackie?",
+          choices: [
+            "He didn't take Jackie's anger seriously",
+            'He recognized Jackie needed a real outlet for his energy, not just a warning',
+            'He wanted to prove he was faster than a child',
+            "He wasn't interested in Jackie's future",
+          ],
+          correctIndex: 1,
+          explanation: 'Anderson met Jackie\'s restlessness with something to actually do with it, rather than just telling him to stop feeling it.',
+        },
+      ],
+    },
+    {
+      id: 'fort-hood',
+      title: 'The Bus at Camp Hood',
+      persona: 'Lieutenant Jackie Robinson',
+      personaBlurb: 'You are Second Lieutenant Jackie Robinson, 761st Tank Battalion, Camp Hood, Texas, July 1944.',
+      year: 'Camp Hood, Texas — July 1944',
+      historicalContext:
+        "The U.S. Army is still segregated by law and custom, even as Black soldiers fight and die overseas for a country that treats them as second-class at home. A 1944 War Department order bans segregation on Army post transportation, though many bus drivers ignore it — or don't know about it at all.",
+      scene:
+        "You board an Army bus on base and sit down next to a friend's wife, roughly in the middle of the bus. The driver glances in his mirror and orders you to move to the back.",
+      sceneConfig: {
+        sky: ['#d9a05b', '#f0d9a0'],
+        ground: '#b08d57',
+        groundLine: 0.68,
+        accent: { x: 0.15, y: 0.2, r: 0.05, color: '#fff3d0' },
+        silhouettes: [
+          { x: 0.1, y: 0.4, w: 0.2, h: 0.1, color: '#4a4a4a' },
+          { x: 0.35, y: 0.5, w: 0.15, h: 0.2, color: '#6b5a3a' },
+          { x: 0.6, y: 0.5, w: 0.15, h: 0.2, color: '#6b5a3a' },
+          { x: 0.85, y: 0.35, w: 0.04, h: 0.35, color: '#3a3a3a' },
+        ],
+      },
+      choices: [
+        {
+          id: 'comply',
+          label: 'Move to the back without a word.',
+          isReality: false,
+          consequence:
+            "You do. It's the easier path in the moment — no confrontation, no report, no risk. But you carry the anger of it, with no telling where it would have come out later instead.",
+        },
+        {
+          id: 'argue-loud',
+          label: 'Refuse loudly and argue with the driver in front of everyone.',
+          isReality: false,
+          consequence:
+            "You refuse, but the shouting match draws an MP before you can calmly explain your reasoning. Without a composed account on record, the report paints you as simply combative — a much harder case to defend.",
+        },
+        {
+          id: 'refuse-calm',
+          label: 'Refuse calmly, and stay in your seat.',
+          isReality: true,
+        },
+      ],
+      realityText:
+        "That's exactly what happened. You refused to move — calmly, but without backing down — citing the 1944 order desegregating on-base transportation. Military police were called; you were taken in and later court-martialed on charges including insubordination, which you denied. At trial, your composed, exact testimony carried the case: you were acquitted on every charge.",
+      closingLine: 'The record holds — not because it was easy, but because you stayed exactly as calm on trial as you were in that seat.',
+      questions: [
+        {
+          kind: 'vocab',
+          prompt: '"Insubordination" most nearly means:',
+          choices: ['Refusing to follow orders from someone in authority', 'An award for bravery', 'A type of military vehicle', 'A formal apology'],
+          correctIndex: 0,
+          explanation: "That's exactly the charge Robinson faced and was acquitted of — refusing an order from a superior.",
+        },
+        {
+          kind: 'main-idea',
+          prompt: 'Why was Robinson court-martialed?',
+          choices: [
+            'For a crime unrelated to the bus incident',
+            'For refusing to move to the back of a military bus, on charges including insubordination',
+            'For deserting his post',
+            'For striking an officer',
+          ],
+          correctIndex: 1,
+          explanation: 'The chapter is built directly around this refusal and the charges that followed it.',
+        },
+        {
+          kind: 'inference',
+          prompt: 'What does the outcome of the trial suggest about the importance of how Robinson responded in the moment?',
+          choices: [
+            'It made no difference — the outcome would have been the same either way',
+            'His calm, composed account under real legal pressure was central to the court ruling in his favor',
+            'The court was going to acquit him no matter what',
+            'Shouting at the driver would have helped his case',
+          ],
+          correctIndex: 1,
+          explanation: 'The text credits his composed testimony, the same quality he showed on the bus, with carrying the case.',
+        },
+      ],
+    },
+    {
+      id: 'rickey-office',
+      title: 'The Office on Montague Street',
+      persona: 'Branch Rickey',
+      personaBlurb: "You're Branch Rickey, general manager of the Brooklyn Dodgers.",
+      year: 'Brooklyn, New York — August 28, 1945',
+      historicalContext:
+        "Major League Baseball has excluded Black players since the 1880s under an unwritten \"gentleman's agreement.\" You've spent over a year secretly scouting Negro Leagues players, telling reporters you're simply forming a new team as cover for what you're really planning.",
+      scene:
+        "Jackie Robinson, a shortstop for the Kansas City Monarchs, sits across your desk. You've decided he's the one — disciplined, fast, college-educated, and, crucially, someone you believe can withstand what's coming without fighting back. Now you have to decide how hard to test that, right here in the room, before you offer him anything.",
+      sceneConfig: {
+        sky: ['#2b2f6b', '#5b4a8a'],
+        ground: '#1a1206',
+        groundLine: 0.72,
+        accent: { x: 0.5, y: 0.15, r: 0.04, color: '#e8e3c8' },
+        silhouettes: [
+          { x: 0.02, y: 0.25, w: 0.14, h: 0.5, color: '#14172e' },
+          { x: 0.2, y: 0.15, w: 0.12, h: 0.6, color: '#1c2040' },
+          { x: 0.36, y: 0.35, w: 0.1, h: 0.4, color: '#14172e' },
+          { x: 0.6, y: 0.2, w: 0.13, h: 0.55, color: '#1c2040' },
+          { x: 0.78, y: 0.3, w: 0.1, h: 0.45, color: '#14172e' },
+          { x: 0.24, y: 0.25, w: 0.02, h: 0.02, color: '#f2d879' },
+          { x: 0.63, y: 0.3, w: 0.02, h: 0.02, color: '#f2d879' },
+        ],
+      },
+      choices: [
+        {
+          id: 'offer-plain',
+          label: 'Simply offer him the contract and hope for the best.',
+          isReality: false,
+          consequence:
+            "You sign him without ever testing his temperament. It's a gamble — without knowing for certain he can hold his composure under the abuse to come, you send him into the league blind, with no shared understanding of what he's agreed to endure.",
+        },
+        {
+          id: 'discourage',
+          label: "Warn him off — tell him it's too dangerous and not worth the risk.",
+          isReality: false,
+          consequence:
+            "You talk him out of it. Baseball's color line holds for a while longer, waiting for another team, another executive, another player willing to take the same risk, someday.",
+        },
+        {
+          id: 'provoke',
+          label: "Act out the exact abuse he'll face — a hostile clerk, an opposing player, a screaming fan — and watch how he responds.",
+          isReality: true,
+        },
+      ],
+      realityText:
+        "That's exactly what you did. In that meeting, you played the part of a racist hotel clerk, an opposing player, a screaming fan — pushing Robinson as hard in that room as the world would push him on the field. When he finally asked if you wanted a player \"afraid to fight back,\" you told him the truth: you wanted a player with guts enough not to. He agreed. On April 15, 1947, he started at first base for the Brooklyn Dodgers — the first Black player in the modern major leagues.",
+      closingLine: 'The record holds — because you needed to know, before either of you risked everything, that he actually could.',
+      questions: [
+        {
+          kind: 'vocab',
+          prompt: 'To "provoke" someone most nearly means:',
+          choices: ['To calm them down', 'To deliberately trigger a reaction from them', 'To pay them a compliment', 'To ignore them completely'],
+          correctIndex: 1,
+          explanation: "That's exactly what Rickey did — deliberately acting out abuse to see how Robinson would react.",
+        },
+        {
+          kind: 'main-idea',
+          prompt: 'Why did Rickey act out abusive scenarios in front of Robinson before offering him a contract?',
+          choices: [
+            'He enjoyed being cruel',
+            'He needed to know Robinson could withstand real abuse without retaliating, since retaliating would end the whole plan',
+            'It was a standard tryout for every player',
+            "He was testing Robinson's batting swing",
+          ],
+          correctIndex: 1,
+          explanation: "The chapter frames this as a deliberate test of temperament, not cruelty for its own sake.",
+        },
+        {
+          kind: 'inference',
+          prompt: "What does Robinson's agreement in that meeting suggest about the deal he made with Rickey?",
+          choices: [
+            'He had no real choice in the matter',
+            'He knowingly accepted a specific, difficult personal sacrifice in exchange for the chance to break the color line',
+            "He didn't understand what he was agreeing to",
+            'Rickey forced him against his will',
+          ],
+          correctIndex: 1,
+          explanation: 'Robinson understood exactly what he was signing up for — the chapter shows him asking Rickey directly what kind of player he wanted.',
+        },
+      ],
+    },
+    {
+      id: 'standing-beside-him',
+      title: 'Standing Beside Him',
+      persona: 'Pee Wee Reese',
+      personaBlurb: "You're Pee Wee Reese, the Dodgers' shortstop and team captain.",
+      year: 'A road game, 1947',
+      historicalContext:
+        "Robinson's rookie season draws relentless hostility — hate mail, opposing bench jockeying, and open threats in some cities. Several of Robinson's own teammates had circulated a petition refusing to play alongside him before the team's manager shut it down.",
+      scene:
+        "During a road game, fans and opposing players are shouting at Robinson from the stands and the dugout alike. You're the team's captain, a well-liked, Kentucky-born infielder, standing near him on the field.",
+      sceneConfig: {
+        sky: ['#4a90d9', '#bfe3ff'],
+        ground: '#3fb27f',
+        groundLine: 0.62,
+        accent: { x: 0.85, y: 0.15, r: 0.06, color: '#fff3d0' },
+        silhouettes: [
+          { x: 0, y: 0.35, w: 1, h: 0.16, color: '#8a8f9a' },
+          { x: 0, y: 0.36, w: 1, h: 0.02, color: '#5b6070' },
+          { x: 0.45, y: 0.66, w: 0.1, h: 0.08, color: '#c9a86b' },
+        ],
+      },
+      choices: [
+        {
+          id: 'ignore-focus',
+          label: "Stay focused on the game and ignore it — let your play speak for itself.",
+          isReality: false,
+          consequence:
+            "You keep your head down and play your position. It's not unkind, exactly, but it does nothing to answer the moment — and the crowd, sensing no pushback at all, only gets louder.",
+        },
+        {
+          id: 'confront-crowd',
+          label: 'Shout back at the crowd yourself.',
+          isReality: false,
+          consequence:
+            'You turn and yell back. It feels satisfying for a second, but it escalates into a shouting match between the stands and the field, without changing how Robinson is treated once the noise dies down.',
+        },
+        {
+          id: 'stand-beside',
+          label: 'Walk over and stand beside him, arm on his shoulder, in full view of the crowd.',
+          isReality: true,
+        },
+      ],
+      realityText:
+        "That's exactly what you did. In front of a hostile crowd, you walked over to Robinson at his position and put your arm around him — a simple, public gesture from a popular white teammate that needed no words. It didn't end the abuse Robinson faced that season, but it told both benches, and the stands, exactly where the team's captain stood.",
+      closingLine: 'The record holds — because sometimes standing next to someone, in plain sight, says everything that needs saying.',
+      questions: [
+        {
+          kind: 'vocab',
+          prompt: '"Hostile" most nearly means:',
+          choices: ['Friendly and welcoming', 'Unfriendly or aggressively opposed', 'Quiet and indifferent', 'Confused'],
+          correctIndex: 1,
+          explanation: 'The hostile crowd is the one shouting and threatening — the opposite of welcoming.',
+        },
+        {
+          kind: 'main-idea',
+          prompt: 'What did Pee Wee Reese actually do in this moment?',
+          choices: [
+            "He argued with the crowd on Robinson's behalf",
+            'He publicly stood beside Robinson with a hand on his shoulder, in front of a hostile crowd',
+            'He asked to be traded to a different team',
+            'He refused to play that day',
+          ],
+          correctIndex: 1,
+          explanation: 'The chapter is built around this specific, real, public gesture.',
+        },
+        {
+          kind: 'inference',
+          prompt: "What does the chapter suggest about why Reese's gesture mattered, even though it didn't stop the abuse?",
+          choices: [
+            'It was meaningless since the hostility continued',
+            'A public, visible show of solidarity from a respected teammate carried its own impact, separate from whether it silenced the crowd',
+            'It only mattered to Reese himself',
+            'It made the crowd immediately stop and apologize',
+          ],
+          correctIndex: 1,
+          explanation: "The chapter is careful to say it didn't end the abuse, while still treating the gesture as meaningful in its own right.",
+        },
+      ],
+    },
+  ],
+};

@@ -6,6 +6,7 @@ import { drawSprite, gearForSlot, startIdleBob } from './sprite';
 import { playBlip, playCorrect, playWrong, playLevelUp, playBadge } from './sfx';
 import { flashScreen, burstParticles, popScore, ensureScanlineOverlay } from './effects';
 import { loadSave, persistSave, levelForXp, xpProgress, rankForLevel, applyRunToSave, BADGES } from './save';
+import { startQuest } from './quest';
 
 type Screen =
   | 'start'
@@ -267,6 +268,17 @@ function render() {
       app.innerHTML = renderStart();
       document.querySelector('#start-btn')?.addEventListener('click', startGame);
       document.querySelector('#guide-btn')?.addEventListener('click', () => openGuide('start'));
+      document.querySelector('#quest-btn')?.addEventListener('click', () => {
+        playBlip();
+        if (stopIdleBob) {
+          stopIdleBob();
+          stopIdleBob = null;
+        }
+        startQuest(app, () => {
+          state.screen = 'start';
+          render();
+        });
+      });
       setupAvatarCanvas('#avatar-preview');
       break;
     case 'guide':
@@ -373,6 +385,7 @@ function renderStart(): string {
         <li>Answer in a row without missing to build a streak and steady the timeline.</li>
       </ul>
       <button id="start-btn" class="primary-btn">Begin your first jump</button>
+      <button id="quest-btn" class="secondary-btn">Deep Quest: Jackie Robinson (Beta)</button>
       <button id="guide-btn" class="secondary-btn">Your Guide</button>
     </div>
   `;

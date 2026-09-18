@@ -145,6 +145,32 @@ h2 {
   line-height: 1.5;
 }
 
+.persona-blurb {
+  background: var(--surface-raised);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.historical-context {
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.scene-canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
 .passage {
   background: var(--surface);
   border-radius: var(--radius);
@@ -233,9 +259,16 @@ h2 {
 }
 
 @media (hover: hover) {
-  .choice-btn:hover {
+  .choice-btn:hover:not(:disabled) {
     border-color: var(--accent);
   }
+}
+
+.choice-btn:disabled {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .feedback-screen {
