@@ -83,9 +83,14 @@ h2 {
   margin-top: 8px;
 }
 
-.primary-btn:hover,
 .primary-btn:focus-visible {
   filter: brightness(1.08);
+}
+
+@media (hover: hover) {
+  .primary-btn:hover {
+    filter: brightness(1.08);
+  }
 }
 
 .primary-btn:active {
@@ -104,9 +109,14 @@ h2 {
   cursor: pointer;
 }
 
-.secondary-btn:hover,
 .secondary-btn:focus-visible {
   border-color: var(--accent);
+}
+
+@media (hover: hover) {
+  .secondary-btn:hover {
+    border-color: var(--accent);
+  }
 }
 
 .progress {
@@ -218,9 +228,14 @@ h2 {
   cursor: pointer;
 }
 
-.choice-btn:hover,
 .choice-btn:focus-visible {
   border-color: var(--accent);
+}
+
+@media (hover: hover) {
+  .choice-btn:hover {
+    border-color: var(--accent);
+  }
 }
 
 .feedback-screen {
