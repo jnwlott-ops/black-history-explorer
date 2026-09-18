@@ -586,10 +586,11 @@ export const jackieQuest: Quest = {
       scene:
         "Jackie Robinson, twelve years old, runs with a loose group of neighborhood kids the city calls the \"Pepper Street Gang\" — more bored than criminal, but drifting toward real trouble. Today they turn up at your garage rattled: turned away from the plunge again, on the wrong day, by an attendant who didn't bother explaining why. One of the older boys is already talking about going back tonight to settle it.",
       sceneConfig: {
-        sky: ['#6ea8d8', '#cfe8ff'],
-        ground: '#c9a86b',
+        sky: ['#4f9be0', '#bfe6ff'],
+        ground: '#dab06a',
         groundLine: 0.7,
-        accent: { x: 0.82, y: 0.18, r: 0.06, color: '#f2d879' },
+        accent: { x: 0.82, y: 0.18, r: 0.06, color: '#f7dc6f' },
+        weather: 'clouds',
         silhouettes: [
           { x: 0.05, y: 0.55, w: 0.18, h: 0.15, color: '#8a6a45' },
           { x: 0.28, y: 0.5, w: 0.12, h: 0.2, color: '#9c7a52' },
@@ -670,10 +671,11 @@ export const jackieQuest: Quest = {
       scene:
         "You board an Army bus on base and sit down next to a friend's wife, roughly in the middle of the bus. The driver glances in his mirror and orders you to move to the back.",
       sceneConfig: {
-        sky: ['#d9a05b', '#f0d9a0'],
-        ground: '#b08d57',
+        sky: ['#e0913f', '#f5dea0'],
+        ground: '#b98d4f',
         groundLine: 0.68,
         accent: { x: 0.15, y: 0.2, r: 0.05, color: '#fff3d0' },
+        weather: 'clouds',
         silhouettes: [
           { x: 0.1, y: 0.4, w: 0.2, h: 0.1, color: '#4a4a4a' },
           { x: 0.35, y: 0.5, w: 0.15, h: 0.2, color: '#6b5a3a' },
@@ -752,18 +754,25 @@ export const jackieQuest: Quest = {
       scene:
         "Jackie Robinson, a shortstop for the Kansas City Monarchs, sits across your desk. You've decided he's the one — disciplined, fast, college-educated, and, crucially, someone you believe can withstand what's coming without fighting back. Now you have to decide how hard to test that, right here in the room, before you offer him anything.",
       sceneConfig: {
-        sky: ['#2b2f6b', '#5b4a8a'],
+        sky: ['#242863', '#7a5fc4'],
         ground: '#1a1206',
         groundLine: 0.72,
-        accent: { x: 0.5, y: 0.15, r: 0.04, color: '#e8e3c8' },
+        accent: { x: 0.5, y: 0.15, r: 0.04, color: '#f0ecd6' },
+        twinkles: [
+          { x: 0.1, y: 0.08, r: 0.004, color: '#ffffff', phase: 0.2 },
+          { x: 0.3, y: 0.12, r: 0.004, color: '#ffffff', phase: 1.4 },
+          { x: 0.7, y: 0.06, r: 0.004, color: '#ffffff', phase: 2.6 },
+          { x: 0.9, y: 0.14, r: 0.004, color: '#ffffff', phase: 0.8 },
+          { x: 0.45, y: 0.05, r: 0.004, color: '#ffffff', phase: 3.5 },
+          { x: 0.24, y: 0.25, r: 0.006, color: '#f2d879', phase: 1.0 },
+          { x: 0.63, y: 0.3, r: 0.006, color: '#f2d879', phase: 2.2 },
+        ],
         silhouettes: [
           { x: 0.02, y: 0.25, w: 0.14, h: 0.5, color: '#14172e' },
           { x: 0.2, y: 0.15, w: 0.12, h: 0.6, color: '#1c2040' },
           { x: 0.36, y: 0.35, w: 0.1, h: 0.4, color: '#14172e' },
           { x: 0.6, y: 0.2, w: 0.13, h: 0.55, color: '#1c2040' },
           { x: 0.78, y: 0.3, w: 0.1, h: 0.45, color: '#14172e' },
-          { x: 0.24, y: 0.25, w: 0.02, h: 0.02, color: '#f2d879' },
-          { x: 0.63, y: 0.3, w: 0.02, h: 0.02, color: '#f2d879' },
         ],
       },
       character: 'suit',
@@ -837,10 +846,11 @@ export const jackieQuest: Quest = {
       scene:
         "During a road game, fans and opposing players are shouting at Robinson from the stands and the dugout alike. You're the team's captain, a well-liked, Kentucky-born infielder, standing near him on the field.",
       sceneConfig: {
-        sky: ['#4a90d9', '#bfe3ff'],
-        ground: '#3fb27f',
+        sky: ['#3a85d9', '#a8dfff'],
+        ground: '#33c17a',
         groundLine: 0.62,
         accent: { x: 0.85, y: 0.15, r: 0.06, color: '#fff3d0' },
+        weather: 'clouds',
         silhouettes: [
           { x: 0, y: 0.35, w: 1, h: 0.16, color: '#8a8f9a' },
           { x: 0, y: 0.36, w: 1, h: 0.02, color: '#5b6070' },

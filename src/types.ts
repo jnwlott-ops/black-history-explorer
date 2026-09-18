@@ -97,6 +97,10 @@ export interface SceneConfig {
   groundLine: number;
   silhouettes: { x: number; y: number; w: number; h: number; color: string }[];
   accent?: { x: number; y: number; r: number; color: string };
+  /** Drifting blocky clouds across the sky, for daytime scenes. */
+  weather?: 'clouds';
+  /** Twinkling points (stars, distant window lights) for night scenes. */
+  twinkles?: { x: number; y: number; r: number; color: string; phase: number }[];
 }
 
 export interface QuestChoiceOption {

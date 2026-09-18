@@ -42,6 +42,7 @@ const quest = jackieQuest;
 let app: HTMLElement;
 let onExit: () => void;
 let timerId: number | undefined;
+let sceneAnimId: number | undefined;
 let qstate: QState;
 
 function freshState(): QState {
@@ -238,10 +239,12 @@ function finalizeQuest() {
 function exitQuest() {
   playBlip();
   clearTimer();
+  stopSceneAnimation();
   onExit();
 }
 
 function render() {
+  stopSceneAnimation();
   switch (qstate.screen) {
     case 'intro':
       app.innerHTML = renderIntro();
@@ -251,7 +254,7 @@ function render() {
     case 'chapter-intro':
       app.innerHTML = renderChapterIntro();
       document.querySelector('#quest-decide-btn')?.addEventListener('click', goToDecision);
-      drawSceneCanvas('#quest-scene', 0.55);
+      startSceneAnimation('#quest-scene', 0.55);
       break;
     case 'decision':
       app.innerHTML = renderDecision();
@@ -266,7 +269,7 @@ function render() {
     case 'reality':
       app.innerHTML = renderReality();
       document.querySelector('#quest-begin-check-btn')?.addEventListener('click', beginQuestions);
-      drawSceneCanvas('#quest-scene', 1);
+      startSceneAnimation('#quest-scene', 1);
       goToRealityView();
       break;
     case 'question':
@@ -292,13 +295,30 @@ function render() {
   }
 }
 
-function drawSceneCanvas(selector: string, brightness: number) {
-  const canvas = document.querySelector<HTMLCanvasElement>(selector);
-  if (!canvas) return;
-  const chapter = currentChapter();
-  drawLandscape(canvas, chapter.sceneConfig);
-  drawCharacter(canvas, chapter.character, chapter.characterX, chapter.sceneConfig.groundLine);
-  canvas.style.filter = `brightness(${brightness})`;
+function stopSceneAnimation() {
+  if (sceneAnimId !== undefined) {
+    cancelAnimationFrame(sceneAnimId);
+    sceneAnimId = undefined;
+  }
+}
+
+function startSceneAnimation(selector: string, brightness: number) {
+  stopSceneAnimation();
+  const start = performance.now();
+  const loop = (now: number) => {
+    const canvas = document.querySelector<HTMLCanvasElement>(selector);
+    if (!canvas) {
+      sceneAnimId = undefined;
+      return;
+    }
+    const elapsed = now - start;
+    const chapter = currentChapter();
+    drawLandscape(canvas, chapter.sceneConfig, elapsed);
+    drawCharacter(canvas, chapter.character, chapter.characterX, chapter.sceneConfig.groundLine, elapsed);
+    canvas.style.filter = `brightness(${brightness})`;
+    sceneAnimId = requestAnimationFrame(loop);
+  };
+  sceneAnimId = requestAnimationFrame(loop);
 }
 
 function triggerFeedbackEffects() {
