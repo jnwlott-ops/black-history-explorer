@@ -1,4 +1,4 @@
-import type { Passage } from './types';
+import type { Passage, SystemicMoment } from './types';
 
 export const passages: Passage[] = [
   {
@@ -498,6 +498,72 @@ export const passages: Passage[] = [
         ],
         correctIndex: 1,
         explanation: 'Morgan trusted his own invention enough to use it in an actual life-or-death rescue, showing it worked well under real pressure.',
+      },
+    ],
+  },
+];
+
+export const systemicMoments: SystemicMoment[] = [
+  {
+    id: 'civil-rights-act-1866',
+    title: 'The Veto Override',
+    year: '1866',
+    setup: `Washington, D.C., April 1866. Eleven months after the war ended, and the country still hasn't decided what freedom actually means. You're a Republican member of the House of Representatives. Weeks ago, Congress passed the Civil Rights Act of 1866 — the first federal law declaring that anyone born in the United States is a citizen, entitled to the same rights as anyone else, regardless of race. President Andrew Johnson vetoed it, calling it federal overreach he says the states should handle on their own. Meanwhile, Southern legislatures have spent the winter passing "Black Codes" — laws that reopened the door to forced labor, banned Black land ownership in whole counties, and let a Black man be arrested for simply being unemployed. Now the House has ten minutes to decide whether to override the President's veto — something no Congress has ever done to a president on a bill this significant. It takes two-thirds, or the bill dies. A colleague leans in: "Where do you stand?"`,
+    choices: [
+      { id: 'override', label: 'Vote to override — push the Civil Rights Act into law over the veto.' },
+      { id: 'sustain', label: 'Vote to sustain the veto — side with Johnson, leave it to the states.' },
+      { id: 'abstain', label: 'Abstain — let the rest of the House decide without you.' },
+    ],
+    realityChoiceId: 'override',
+    speculation: {
+      sustain:
+        "You vote nay. It doesn't matter — the override passes anyway, 122 to 41, with two-thirds to spare. Your name goes into the record on the losing side of one of the most important votes of the era.",
+      abstain:
+        "You duck the vote. The override passes without you, 122 to 41. History records what happened in that chamber — just not what you would have done in it.",
+    },
+    matchIntro:
+      "That's exactly what happened. The House votes 122 to 41 — enough to clear two-thirds — and the Civil Rights Act of 1866 becomes law over the President's veto, the first time any Congress had done that on a bill this significant.",
+    missIntro:
+      "The House votes 122 to 41 anyway — enough to clear two-thirds regardless of your vote — and the Civil Rights Act of 1866 becomes law over the President's veto, the first time any Congress had done that on a bill this significant.",
+    epilogue:
+      "But a law on paper isn't the same as a law enforced. Congress soon worried a future Congress could simply repeal it, so lawmakers wrote its core promise into the Constitution itself as the Fourteenth Amendment. It still wasn't enough. Over the next decade, federal troops enforcing these rights in the South were withdrawn — traded away in an 1877 deal to settle a disputed presidential election. Southern states rewrote their laws to get around the Fourteenth Amendment in every way courts allowed, and by 1896 the Supreme Court itself blessed segregation in Plessy v. Ferguson. The rights this vote protected on paper wouldn't be fully enforced in this country for almost another hundred years.",
+    closingLine: 'The vote was right. The story still isn\'t finished — not even now.',
+    questions: [
+      {
+        kind: 'vocab',
+        prompt: 'In the story, when the House votes to "override" the President\'s veto, that most nearly means:',
+        choices: [
+          'Delaying a decision until the next session',
+          'Canceling out or overruling someone else\'s decision',
+          'Asking a court to review a law',
+          'Resigning from your position',
+        ],
+        correctIndex: 1,
+        explanation: 'Overriding the veto means overruling Johnson\'s decision — that\'s exactly what the two-thirds vote did.',
+      },
+      {
+        kind: 'main-idea',
+        prompt: "Why did Congress later write the Civil Rights Act's protections into the Fourteenth Amendment instead of leaving them as a regular law?",
+        choices: [
+          'The Supreme Court ordered them to',
+          'A regular law could be undone by a future Congress, but a constitutional amendment is far harder to repeal',
+          'President Johnson requested it himself',
+          'It was simply faster than passing a new law',
+        ],
+        correctIndex: 1,
+        explanation: 'A plain statute is one Congress away from being undone; writing it into the Constitution protected the Act from a future repeal.',
+      },
+      {
+        kind: 'inference',
+        prompt: 'The epilogue ends with troops withdrawn in 1877 and the Supreme Court upholding segregation in Plessy v. Ferguson in 1896. What does that suggest about winning a vote like this one?',
+        choices: [
+          'Once a law passes, it enforces itself automatically, forever',
+          'Passing a law is only the first step — without ongoing enforcement and political will, it can still be undermined',
+          'The Civil Rights Act of 1866 was completely forgotten after that year',
+          'The Supreme Court has no authority over civil rights laws',
+        ],
+        correctIndex: 1,
+        explanation: "Passing the law was necessary but not sufficient — enforcement turned out to be a separate, ongoing fight that the country lost for decades.",
       },
     ],
   },
