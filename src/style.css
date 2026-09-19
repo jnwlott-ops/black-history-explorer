@@ -161,14 +161,24 @@ h2 {
   font-size: 0.95rem;
 }
 
-.scene-canvas {
+.quest-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.phaser-stage {
   width: 100%;
-  height: auto;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius);
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  overflow: hidden;
+  background: #10131a;
+}
+
+.phaser-stage canvas {
   display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .passage {

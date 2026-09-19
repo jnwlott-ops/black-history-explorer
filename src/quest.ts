@@ -1,10 +1,11 @@
+import Phaser from 'phaser';
 import { jackieQuest } from './content';
 import { computeScore, QUESTION_SECONDS } from './game';
 import type { QuestChapter } from './types';
 import { playBlip, playCorrect, playWrong, playLevelUp, playBadge } from './sfx';
 import { flashScreen, burstParticles, popScore } from './effects';
 import { loadSave, persistSave, levelForXp, rankForLevel, applyRunToSave, BADGES } from './save';
-import { drawLandscape, drawCharacter } from './scenes';
+import { QuestSceneView, SCENE_KEY, setPendingChapter } from './questScene';
 
 type QuestScreen =
   | 'intro'
@@ -42,8 +43,8 @@ const quest = jackieQuest;
 let app: HTMLElement;
 let onExit: () => void;
 let timerId: number | undefined;
-let sceneAnimId: number | undefined;
 let qstate: QState;
+let phaserGame: Phaser.Game | undefined;
 
 function freshState(): QState {
   return {
@@ -72,7 +73,47 @@ export function startQuest(container: HTMLElement, exitCallback: () => void): vo
   app = container;
   onExit = exitCallback;
   qstate = freshState();
+
+  app.innerHTML = `
+    <div class="quest-shell">
+      <div id="phaser-stage" class="phaser-stage"></div>
+      <div id="quest-content"></div>
+    </div>
+  `;
+
+  setPendingChapter(currentChapter());
+  phaserGame = new Phaser.Game({
+    type: Phaser.AUTO,
+    parent: 'phaser-stage',
+    width: 320,
+    height: 180,
+    pixelArt: true,
+    backgroundColor: '#10131a',
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+    },
+    scene: [QuestSceneView],
+  });
+
   render();
+}
+
+function content(): HTMLElement {
+  return document.querySelector<HTMLElement>('#quest-content')!;
+}
+
+function questScene(): QuestSceneView | null {
+  if (!phaserGame) return null;
+  return phaserGame.scene.getScene(SCENE_KEY) as QuestSceneView | null;
+}
+
+function updatePhaserChapter() {
+  questScene()?.scene.restart({ chapter: currentChapter() });
+}
+
+function celebrateScene() {
+  questScene()?.celebrate();
 }
 
 function currentChapter(): QuestChapter {
@@ -140,15 +181,6 @@ function backToDecision() {
   render();
 }
 
-function goToRealityView() {
-  const heading = document.querySelector<HTMLElement>('.feedback-screen h2, .reading-screen h2');
-  if (heading) {
-    flashScreen('rgba(63, 178, 127, 0.22)');
-    const rect = heading.getBoundingClientRect();
-    burstParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, '#3fb27f');
-  }
-}
-
 function beginQuestions() {
   playBlip();
   qstate.screen = 'question';
@@ -209,6 +241,7 @@ function nextChapter() {
     qstate.chapterIndex += 1;
     qstate.disabledChoices = new Set();
     qstate.screen = 'chapter-intro';
+    updatePhaserChapter();
     render();
   } else {
     finalizeQuest();
@@ -239,86 +272,59 @@ function finalizeQuest() {
 function exitQuest() {
   playBlip();
   clearTimer();
-  stopSceneAnimation();
+  phaserGame?.destroy(true);
+  phaserGame = undefined;
   onExit();
 }
 
 function render() {
-  stopSceneAnimation();
   switch (qstate.screen) {
     case 'intro':
-      app.innerHTML = renderIntro();
+      content().innerHTML = renderIntro();
       document.querySelector('#quest-begin-btn')?.addEventListener('click', goToChapterIntro);
       document.querySelector('#quest-exit-btn')?.addEventListener('click', exitQuest);
       break;
     case 'chapter-intro':
-      app.innerHTML = renderChapterIntro();
+      content().innerHTML = renderChapterIntro();
       document.querySelector('#quest-decide-btn')?.addEventListener('click', goToDecision);
-      startSceneAnimation('#quest-scene', 0.55);
       break;
     case 'decision':
-      app.innerHTML = renderDecision();
+      content().innerHTML = renderDecision();
       document.querySelectorAll<HTMLButtonElement>('.choice-btn:not(:disabled)').forEach((btn) => {
         btn.addEventListener('click', () => pickChoice(btn.dataset.choiceId!));
       });
       break;
     case 'consequence':
-      app.innerHTML = renderConsequence();
+      content().innerHTML = renderConsequence();
       document.querySelector('#quest-retry-btn')?.addEventListener('click', backToDecision);
       break;
     case 'reality':
-      app.innerHTML = renderReality();
+      content().innerHTML = renderReality();
       document.querySelector('#quest-begin-check-btn')?.addEventListener('click', beginQuestions);
-      startSceneAnimation('#quest-scene', 1);
-      goToRealityView();
+      flashScreen('rgba(63, 178, 127, 0.22)');
+      celebrateScene();
       break;
     case 'question':
-      app.innerHTML = renderQuestion();
+      content().innerHTML = renderQuestion();
       document.querySelectorAll<HTMLButtonElement>('.choice-btn').forEach((btn) => {
         btn.addEventListener('click', () => handleAnswer(Number(btn.dataset.index)));
       });
       updateTimerDisplay();
       break;
     case 'feedback':
-      app.innerHTML = renderFeedback();
+      content().innerHTML = renderFeedback();
       document.querySelector('#continue-btn')?.addEventListener('click', continueAfterFeedback);
       triggerFeedbackEffects();
       break;
     case 'chapter-done':
-      app.innerHTML = renderChapterDone();
+      content().innerHTML = renderChapterDone();
       document.querySelector('#quest-next-chapter-btn')?.addEventListener('click', nextChapter);
       break;
     case 'complete':
-      app.innerHTML = renderComplete();
+      content().innerHTML = renderComplete();
       document.querySelector('#quest-exit-btn')?.addEventListener('click', exitQuest);
       break;
   }
-}
-
-function stopSceneAnimation() {
-  if (sceneAnimId !== undefined) {
-    cancelAnimationFrame(sceneAnimId);
-    sceneAnimId = undefined;
-  }
-}
-
-function startSceneAnimation(selector: string, brightness: number) {
-  stopSceneAnimation();
-  const start = performance.now();
-  const loop = (now: number) => {
-    const canvas = document.querySelector<HTMLCanvasElement>(selector);
-    if (!canvas) {
-      sceneAnimId = undefined;
-      return;
-    }
-    const elapsed = now - start;
-    const chapter = currentChapter();
-    drawLandscape(canvas, chapter.sceneConfig, elapsed);
-    drawCharacter(canvas, chapter.character, chapter.characterX, chapter.sceneConfig.groundLine, elapsed);
-    canvas.style.filter = `brightness(${brightness})`;
-    sceneAnimId = requestAnimationFrame(loop);
-  };
-  sceneAnimId = requestAnimationFrame(loop);
 }
 
 function triggerFeedbackEffects() {
@@ -375,7 +381,6 @@ function renderChapterIntro(): string {
   return `
     <div class="screen quest-screen">
       <div class="progress">${chapterProgress()}</div>
-      <canvas id="quest-scene" class="scene-canvas" width="320" height="180"></canvas>
       <h2>${c.title}</h2>
       <p class="years">${c.year}</p>
       <p class="persona-blurb">${c.personaBlurb}</p>
@@ -420,7 +425,6 @@ function renderReality(): string {
   const c = currentChapter();
   return `
     <div class="screen reading-screen">
-      <canvas id="quest-scene" class="scene-canvas" width="320" height="180"></canvas>
       <h2>What really happened</h2>
       <p class="passage">${c.realityText}</p>
       <button id="quest-begin-check-btn" class="primary-btn">Begin the check</button>
