@@ -2,26 +2,26 @@ import type { CharacterArchetype, SceneConfig } from './types';
 
 /** A small, generic standing figure — distinguished by role/attire, never a facial likeness. */
 const CHAR_GRID = [
-  '...CCCC...',
-  '..CCCCCC..',
-  '..FFFFFF..',
-  '..FFFFFF..',
-  '..TTTTTT..',
-  '..TTTTTT..',
-  '..TTTTTT..',
-  '..PPPPPP..',
-  '..PP..PP..',
-  '..PP..PP..',
-  '..PP..PP..',
-  '..LL..LL..',
+  '....CCCC....',
+  '...CCCCCC...',
+  '...FKFFKF...',
+  '...FFFFFF...',
+  '..TTTTTTTT..',
+  '..TTTTTTTT..',
+  '..FTTTTTTF..',
+  '...PPPPPP...',
+  '...PP..PP...',
+  '...PP..PP...',
+  '...PP..PP...',
+  '...LL..LL...',
 ];
 
 const CHAR_PALETTES: Record<CharacterArchetype, Record<string, string>> = {
-  mechanic: { C: '#2a2a2a', F: '#8d5524', T: '#5b6070', P: '#33363f', L: '#1a1206' },
-  kid: { C: '#1a1206', F: '#8d5524', T: '#c9a86b', P: '#3a3f8f', L: '#1a1206' },
-  soldier: { C: '#4a4a2a', F: '#8d5524', T: '#5a5a3a', P: '#4a4a2a', L: '#1a1206' },
-  suit: { C: '#3a2a1a', F: '#e0ac69', T: '#2b2f6b', P: '#1a1206', L: '#1a1206' },
-  ballplayer: { C: '#2b2f6b', F: '#e0ac69', T: '#f5f5f5', P: '#f5f5f5', L: '#1a1206' },
+  mechanic: { C: '#2a2a2a', F: '#8d5524', T: '#5b6070', P: '#33363f', L: '#1a1206', K: '#150f0a' },
+  kid: { C: '#1a1206', F: '#8d5524', T: '#c9a86b', P: '#3a3f8f', L: '#1a1206', K: '#150f0a' },
+  soldier: { C: '#4a4a2a', F: '#8d5524', T: '#5a5a3a', P: '#4a4a2a', L: '#1a1206', K: '#150f0a' },
+  suit: { C: '#3a2a1a', F: '#e0ac69', T: '#2b2f6b', P: '#1a1206', L: '#1a1206', K: '#150f0a' },
+  ballplayer: { C: '#2b2f6b', F: '#e0ac69', T: '#f5f5f5', P: '#f5f5f5', L: '#1a1206', K: '#150f0a' },
 };
 
 export interface CharacterTexture {

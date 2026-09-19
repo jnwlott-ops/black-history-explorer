@@ -122,16 +122,8 @@ export class QuestSceneView extends Phaser.Scene {
 
     this.tweens.add({
       targets: image,
-      y: feetY - charHeight / 2 - 3,
-      duration: 900,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-    });
-    this.tweens.add({
-      targets: image,
-      angle: { from: -2, to: 2 },
-      duration: 700,
+      y: feetY - charHeight / 2 - 2,
+      duration: 1400,
       yoyo: true,
       repeat: -1,
       ease: 'Sine.easeInOut',
